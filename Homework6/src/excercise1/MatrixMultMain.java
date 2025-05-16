@@ -22,6 +22,7 @@ public class MatrixMultMain {
 	 * Computes a matrix using Matrix Multiplication with the DotProduct Thread.
 	 * The matrixes must be nxn matrixes (square) !
 	 * Runtime probably O(n^3) (not the most efficient one)
+	 * Makes use of 2 parallel threads
 	 * @param matrix1 the first Matrix to multiply nxn
 	 * @param matrix2 the second Matrix to multiply nxn
 	 * @return a Matrix (the Result of the matrix multiplication of matrix1 and matrix2
@@ -46,7 +47,7 @@ public class MatrixMultMain {
 				DotProductThread thread2 = null;
 				thread1 = new DotProductThread(matrix1.get(i), verticalMatrix2.get(j));
 				if((j+1)<matrix1.get(0).size()) {
-					thread2 = new DotProductThread(matrix1.get(i), verticalMatrix2.get(j));
+					thread2 = new DotProductThread(matrix1.get(i), verticalMatrix2.get(j+1));
 				}
 				thread1.start();
 				if(thread2!=null) thread2.start();
