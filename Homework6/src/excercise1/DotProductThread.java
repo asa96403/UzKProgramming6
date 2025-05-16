@@ -23,4 +23,29 @@ public class DotProductThread extends Thread {
 			dot += (v1.get(i)*v2.get(i));
 		}
 	}
+
+	//GETTERS AND SETTERS
+	public int getDot() {
+		return dot;
+	}
+
+	public void setDot(int dot) {
+		this.dot = dot;
+	}
+
+	public Vector<Integer> getV1() {
+		return v1;
+	}
+
+	public void setV1(Vector<Integer> v1) {
+		this.v1 = v1;
+	}
+
+	public Vector<Integer> getV2() {
+		return v2;
+	}
+
+	public void setV2(Vector<Integer> v2) {
+		this.v2 = v2;
+	}
 }

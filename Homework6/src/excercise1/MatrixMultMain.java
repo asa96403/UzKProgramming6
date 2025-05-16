@@ -1,11 +1,19 @@
 package excercise1;
+import java.util.Random;
 import java.util.Vector;
 
 public class MatrixMultMain {
+	private static Vector<Vector<Integer>> matrix1 = new Vector<Vector<Integer>>();
+	private static Vector<Vector<Integer>> matrix2 = new Vector<Vector<Integer>>();
+	
 	public static void main(String[] args) {
-		Vector<Vector<Integer>> matrix1;
-		Vector<Vector<Integer>> matrix2;
-		
+		initialize(3);
+		System.out.println("--Matrix1--");
+		displayMatrix(matrix1);
+		System.out.println("--Matrix2--");
+		displayMatrix(matrix2);
+		System.out.println("--Result--");
+		displayMatrix(matrixMult(matrix1, matrix2));
 	}
 	
 	/**
@@ -33,9 +41,40 @@ public class MatrixMultMain {
 			Vector<Integer> temp = new Vector<Integer>();
 			for(int j=0; j<matrix1.get(0).size(); j++ ) {
 				DotProductThread thread1 = new DotProductThread(matrix1.get(i), verticalMatrix2.get(j));
-				
+				thread1.start();
+				try {
+					thread1.join();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				temp.add(thread1.getDot());
 			}
+			result.add(temp);
 		}
 		return result;
+	}
+	
+	public static void initialize(int dimension) {
+		Random random = new Random();
+		for(int i=0; i<dimension; i++) {
+			Vector<Integer> temp = new Vector<Integer>();
+			for(int j=0; j<dimension; j++) {
+				temp.add(random.nextInt(10));
+			}
+			matrix1.add(temp);
+		}
+		for(int i=0; i<dimension; i++) {
+			Vector<Integer> temp = new Vector<Integer>();
+			for(int j=0; j<dimension; j++) {
+				temp.add(random.nextInt(10));
+			}
+			matrix2.add(temp);
+		}
+	}
+	
+	public static void displayMatrix(Vector<Vector<Integer>> matrix) {
+		for(int i=0; i<matrix.size(); i++) {
+			System.out.println(matrix.get(i).toString());
+		}
 	}
 }
