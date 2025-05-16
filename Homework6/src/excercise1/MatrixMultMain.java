@@ -7,7 +7,7 @@ public class MatrixMultMain {
 	private static Vector<Vector<Integer>> matrix2 = new Vector<Vector<Integer>>();
 	
 	public static void main(String[] args) {
-		initialize(3);
+		initialize(3, 10);
 		System.out.println("--Matrix1--");
 		displayMatrix(matrix1);
 		System.out.println("--Matrix2--");
@@ -54,24 +54,35 @@ public class MatrixMultMain {
 		return result;
 	}
 	
-	public static void initialize(int dimension) {
+	/**
+	 * initializes matrix1 and matrix2 with random numbers within the specified bounds (exklusive) and the dimension dimension x dimension
+	 * @param dimension specifies the dimension of the square matrixes
+	 * @param bound the upper bound for the random numbers to be generated
+	 * @author aabert
+	 */
+	public static void initialize(int dimension, int bound) {
 		Random random = new Random();
 		for(int i=0; i<dimension; i++) {
 			Vector<Integer> temp = new Vector<Integer>();
 			for(int j=0; j<dimension; j++) {
-				temp.add(random.nextInt(10));
+				temp.add(random.nextInt(bound));
 			}
 			matrix1.add(temp);
 		}
 		for(int i=0; i<dimension; i++) {
 			Vector<Integer> temp = new Vector<Integer>();
 			for(int j=0; j<dimension; j++) {
-				temp.add(random.nextInt(10));
+				temp.add(random.nextInt(bound));
 			}
 			matrix2.add(temp);
 		}
 	}
 	
+	/**
+	 * displays the matrix in the console by displaying every row vector using the toString method below each other
+	 * @param matrix the matrix to display in the console
+	 * @author aabert
+	 */
 	public static void displayMatrix(Vector<Vector<Integer>> matrix) {
 		for(int i=0; i<matrix.size(); i++) {
 			System.out.println(matrix.get(i).toString());
