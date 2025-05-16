@@ -39,15 +39,23 @@ public class MatrixMultMain {
 		//Multiplying the Matrixes using the DotProductThread
 		for(int i=0; i<matrix1.size(); i++) {
 			Vector<Integer> temp = new Vector<Integer>();
-			for(int j=0; j<matrix1.get(0).size(); j++ ) {
-				DotProductThread thread1 = new DotProductThread(matrix1.get(i), verticalMatrix2.get(j));
+			for(int j=0; j<matrix1.get(0).size(); j += 2 ) {
+				DotProductThread thread1;
+				DotProductThread thread2 = null;
+				thread1 = new DotProductThread(matrix1.get(i), verticalMatrix2.get(j));
+				if((j+1)<matrix1.get(0).size()) {
+					thread2 = new DotProductThread(matrix1.get(i), verticalMatrix2.get(j));
+				}
 				thread1.start();
+				if(thread2!=null) thread2.start();
 				try {
 					thread1.join();
+					if(thread2!=null) thread2.join();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				temp.add(thread1.getDot());
+				if(thread2!=null) temp.add(thread2.getDot());
 			}
 			result.add(temp);
 		}
