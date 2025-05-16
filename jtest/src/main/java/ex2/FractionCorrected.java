@@ -1,10 +1,15 @@
 package ex2;
 
+/**
+ * Fixed all mistakes in this class, passes JUnit tests.
+ * comments do not apply anymore!
+ * @author aabert
+ */
 public class FractionCorrected {
 	private int zaehler;
 	private int nenner;
 
-	// icomplete
+	// incomplete
 	public FractionCorrected(int zaehler, int nenner) {
 		this.zaehler = zaehler;
 		if(nenner==0) {
@@ -77,7 +82,10 @@ public class FractionCorrected {
 	}
 
 	public void setNenner(int nenner) {
-		this.nenner = nenner;
-
+		if(nenner==0) {
+			throw new ArithmeticException("You cannot divide by 0!");
+		} else {
+			this.nenner = nenner;
+		}
 	}
 }
