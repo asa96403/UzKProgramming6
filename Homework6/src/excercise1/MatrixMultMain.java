@@ -7,13 +7,15 @@ public class MatrixMultMain {
 	private static Vector<Vector<Integer>> matrix2 = new Vector<Vector<Integer>>();
 	
 	public static void main(String[] args) {
-		initialize(3, 10);
+		long currTime1=System.currentTimeMillis();
+		initialize(4, 10);
 		System.out.println("--Matrix1--");
 		displayMatrix(matrix1);
 		System.out.println("--Matrix2--");
 		displayMatrix(matrix2);
 		System.out.println("--Result--");
 		displayMatrix(matrixMult(matrix1, matrix2));
+		System.out.println("Execution took " + (System.currentTimeMillis()-currTime1) + " Miliseconds");
 	}
 	
 	/**
